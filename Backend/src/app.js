@@ -4,6 +4,7 @@ const connectDb = require("./config/database")
 const Port = process.env.PORT || 3011
 
 const app = express();
+app.use('/user',require('./Routers/userRoute'))
 
 
 connectDb().then(()=>{
