@@ -1,4 +1,8 @@
+const bcrypt = require('bcrypt');
+
 const User = require("../Models/UserModel");
+const {emailcheck} = require("../utils/validate_Email");
+
 
 const adddata = async (req, res) => {
   // Static Data Entry
@@ -9,12 +13,13 @@ const adddata = async (req, res) => {
   //     DOB: new Date(2003,11,15),
   //     Password:"Bindal@123"
   // })
-  const data = req.body;
+  const {firstName , lastName,email,DOB,Password,TechnicalSkills} = req.body;
   try{
-    if(data?.TechnicalSkills.length > 10){
+    if(TechnicalSkills.length > 10){
         throw new error ("Skills should be not more then 10");
     }
-    const user = new User(data);
+    const passwordhash = await bcrypt.hash(Password,10);
+    const user = new User({firstName,lastName,email,DOB,Password:passwordhash,TechnicalSkills});
     await user.save();
     res.send("Data Added Successfully");
   } catch (err) {
@@ -50,10 +55,10 @@ const updatedata = async (req, res) => {
          Allowed_Update.includes(k)
     );
     if (!check) {
-        throw new error("Data is insufficent for update")
+      throw new Error("Data is insufficent for update")
     }
     if(data?.TechnicalSkills.length > 10){
-        throw new error ("Skills should be not more then 10");
+      throw new Error("Skills should be not more then 10");
     }
     await User.findOneAndUpdate({ email: email }, data, {
       runValidators: true,
@@ -77,4 +82,29 @@ const deleteData = async (req, res) => {
   }
 };
 
-module.exports = { adddata, getdata, getdatabyemail, updatedata, deleteData };
+
+const login = async(req,res)=>{
+    try{
+      emailcheck(req);
+      const {email,Password} = req.body;
+    const user = await User.findOne({email: email}) 
+    if(user){
+      const check = await bcrypt.compare(Password,user.Password);
+      if(check){
+        res.send("USER Logged in");
+      }
+      else{
+        throw new Error("Invalid Password");
+      }  
+    }
+    else{
+      throw new Error("No user Registered");
+    }
+    } catch (err) {
+    res.status(400).send("Something is Wrong in Login : " + err.message);
+  }
+}
+
+
+
+module.exports = { adddata, getdata, getdatabyemail, updatedata, deleteData ,login};
