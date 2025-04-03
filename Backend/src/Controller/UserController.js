@@ -92,7 +92,7 @@ const login = async(req,res)=>{
     if(user){
       const check = await bcrypt.compare(Password,user.Password);
       if(check){
-        const token = jwt.sign('user._id',process.env.JWT_SECRET_KEY);
+        const token = await jwt.sign('user._id',process.env.JWT_SECRET_KEY);
         res.cookie("token",token);
         // console.log(req.cookies);
         res.send("USER Logged in");
