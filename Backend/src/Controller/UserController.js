@@ -38,18 +38,25 @@ const getdata = async (req, res) => {
 };
 
 const getdatabyemail = async (req, res) => {
-  const email = req.params.email;
+  // const email = req.params.email;
   try {
-    const user = await User.findOne({ email: email });
-    res.send(user);
+    const {_id,firstName,lastName,email,TechnicalSkills} = req.userdata;
+    // const user = await User.findOne({ email: email });
+    // console.log(User1);
+    res.send({
+      _id,
+      firstName,
+      lastName,
+      email,
+      TechnicalSkills
+    });
   } catch (err) {
     res.status(400).send("Something is Wrong");
   }
 };
 
 const updatedata = async (req, res) => {
-  const email = req.params.email;
-  const data = req.body;
+  const data = req.userdata;
   try {
     const Allowed_Update = ["lastname", "DOB", "TechnicalSkills", "Password","gender"];
     const check = Object.keys(data).every((k) =>
@@ -71,7 +78,7 @@ const updatedata = async (req, res) => {
 };
 
 const deleteData = async (req, res) => {
-  const email = req.params.id;
+  const {email} = req.userdata;
   try {
     const deletedata = await User.findOneAndDelete({ email: email });
     if (!deletedata) {
@@ -92,7 +99,7 @@ const login = async(req,res)=>{
     if(user){
       const check = await bcrypt.compare(Password,user.Password);
       if(check){
-        const token = await jwt.sign('user._id',process.env.JWT_SECRET_KEY);
+        const token = await jwt.sign({_id: user._id},process.env.JWT_SECRET_KEY);
         res.cookie("token",token);
         // console.log(req.cookies);
         res.send("USER Logged in");
@@ -108,7 +115,5 @@ const login = async(req,res)=>{
     res.status(400).send("Something is Wrong in Login : " + err.message);
   }
 }
-
-
 
 module.exports = { adddata, getdata, getdatabyemail, updatedata, deleteData ,login};

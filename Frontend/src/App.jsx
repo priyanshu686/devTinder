@@ -1,11 +1,10 @@
 
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <h1>Hello </h1>
+      <h1 className="text-3xl">Hello </h1>
     </>
   )
 }
