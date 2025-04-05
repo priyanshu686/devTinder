@@ -7,7 +7,10 @@ const Port = process.env.PORT || 3011
 const app = express();
 app.use(express.json());
 app.use(cookie_parser());
-app.use('/user',require('./Routers/userRoute'))
+
+
+app.use('/auth',require('./Routers/authRoute'));
+app.use('/profile',require('./Routers/profileRouter'));
 
 
 connectDb().then(()=>{
