@@ -20,7 +20,12 @@ const ConnectionRequestSchema = new mongoose.Schema({
     timestamps:true
 })
 
-
+ConnectionRequestSchema.pre("save",function(next){
+    if(this.FromUserId.equals(this.ToUserId)){
+        throw new Error("Both Sender and Recevier is same");
+    }
+    next();
+})
 const ConnectionRequestModel = new mongoose.model('ConnectionRequest',ConnectionRequestSchema);
 
 module.exports = ConnectionRequestModel;
