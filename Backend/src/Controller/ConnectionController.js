@@ -9,17 +9,19 @@ const CreateConnection = async(req,res)=>{
     if(!checkStatus){
         throw new Error("Status is invalid"); 
     }
-    const checkId = ConnectionRequest.findOne({
+    const checkId = await ConnectionRequest.findOne({
         $or:[
-            {FromUserId:UserId , ToUserId:ToId},
+            {   FromUserId:UserId ,
+                ToUserId:ToId},
             {
                 FromUserId:ToId,
-                UserId:ToId
+                UserId:UserId   
             }
         ]
     })
+    console.log(checkId);
     if(checkId){
-        throw new Error("Request Already Created");
+        return res.status(401).send("Request Already Created");
     }
     try {
         const Connect = new ConnectionRequest({
