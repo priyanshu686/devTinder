@@ -23,7 +23,7 @@ const ConnectionRequestSchema = new mongoose.Schema({
 
 ConnectionRequestSchema.index({FromUserId:1 ,ToUserId:1},{unique:true});
 
-ConnectionRequestSchema.pre("findOne",function(next){
+ConnectionRequestSchema.pre("save",function(next){
     if(this.FromUserId.equals(this.ToUserId)){
         throw new Error("Both Sender and Recevier is same");
     }
