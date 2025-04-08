@@ -1,5 +1,5 @@
 const ConnectionRequest = require('../Models/ConnectionRequestModel');
-
+const User = require('../Models/UserModel');
 
 const GetConnection = async(req,res) => {
     const UserID = req.userdata._id;
@@ -51,7 +51,37 @@ const checkfriend = async(req,res)=>{
     }
 }
 
+
+const feed = async(req,res)=>{
+    try{
+        const logged = req.userdata;
+        const connected = await ConnectionRequest.find({
+            $or:[
+                {FromUserId:logged._id},
+                {ToUserId:logged._id}
+            ]
+        }).select("FromUserId ToUserId");
+        const removingids = new Set();
+        await connected.forEach((d)=>{
+            removingids.add(d.FromUserId),
+            removingids.add(d.ToUserId)
+        }
+        )
+        const data = await User.find({
+            $and:[
+                {_id: {$nin: Array.from(removingids)}},
+                {_id:{$ne:logged._id}}
+            ]
+        }).select("firstName lastName email DOB gender TechnicalSkills");
+        res.send(data);
+        
+    }catch(err){
+        res.status(400).send("ERROR: "+ err.message);
+    }
+}
+
 module.exports = {
     GetConnection,
-    checkfriend
+    checkfriend,
+    feed
 }
