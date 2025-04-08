@@ -5,7 +5,7 @@ const ConnectionRoute = express.Router();
 
 ConnectionRoute.post('/request/:status/:id',userAuth,CreateConnection);
 ConnectionRoute.post('/request/replay/:status/:id',userAuth,ReplayedConnection)
-ConnectionRoute.get('/request',userAuth,GetConnection);
+
 
 
 module.exports = ConnectionRoute;

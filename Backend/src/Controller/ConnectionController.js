@@ -36,24 +36,7 @@ const CreateConnection = async(req,res)=>{
     }
 }
 
-const GetConnection = async(req,res) => {
-    const UserID = req.userdata._id;
-    const Connections = await ConnectionRequest.find({
-        ToUserId:UserID,
-        Status:"Interested"
-    })
-    if(!Connections){
-        res.json({message:"No Request Found"})
-    }
-    try{
-        res.json({
-            message:"All Connections",
-            data:Connections
-        })
-    }catch(err){
-        res.status(400).send("ERROR: " + err.message);
-    }
-}
+
 
 
 const ReplayedConnection = async(req,res)=>{
@@ -87,4 +70,4 @@ const ReplayedConnection = async(req,res)=>{
     }
 
 }
-module.exports = {CreateConnection , ReplayedConnection , GetConnection};
+module.exports = {CreateConnection , ReplayedConnection};

@@ -21,7 +21,7 @@ const adddata = async (req, res) => {
         throw new error ("Skills should be not more then 10");
     }
     const passwordhash = await bcrypt.hash(Password,10);
-    const user = new User({firstName,lastName,email,DOB,Password:passwordhash,TechnicalSkills});
+    const user = new User({firstName,lastName,email,DOB,gender,Password:passwordhash,TechnicalSkills});
     await user.save();
     res.send("Data Added Successfully");
   } catch (err) {

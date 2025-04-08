@@ -12,6 +12,7 @@ app.use(cookie_parser());
 app.use('/auth',require('./Routers/authRoute'));
 app.use('/profile',require('./Routers/profileRouter'));
 app.use('/connection',require('./Routers/ConnectionRoute'));
+app.use('/user',require('./Routers/UserRoute'));
 
 
 connectDb().then(()=>{
