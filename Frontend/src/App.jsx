@@ -1,11 +1,22 @@
-import Navbar from'./components/navbar.jsx'
-
+import {createBrowserRouter, RouterProvider} from "react-router"
+import Body from './components/Body'
+import Login from './components/Login'
 function App() {
-
+ const Route = createBrowserRouter([
+    {
+      path:'/',
+      Component:Body,
+      children:[{
+        index:true,
+      },{
+        path:'login',
+        Component:Login,
+      }]
+    }
+ ])
   return (
     <>
-      <Navbar/>
-      <h1 className="text-3xl">Hello </h1>
+      <RouterProvider router={Route}/>
     </>
   )
 }

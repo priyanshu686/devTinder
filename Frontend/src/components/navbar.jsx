@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+
+
 
 const Navbar = () => {
   return (
-    <div className="navbar bg-base-100 shadow-lg">
+    <div className="navbar bg-neutral shadow-lg">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl">DevTinder</a>
+        <a className="mx-2 font-bold text-xl text-white">DevTinder</a>
       </div>
-      <div className="btn btn-ghost btn-circle avatar mx-2">
+      <div className="avatar mx-2">
         <div className="w-8 rounded-full">
           <img
             alt="Profile Block"
@@ -24,7 +25,7 @@ const Navbar = () => {
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            className="inline-block h-5 w-5 stroke-current cursor-pointer "
+            className="inline-block h-5 w-5 stroke-current cursor-pointer text-white "
           >
             {" "}
             <path
