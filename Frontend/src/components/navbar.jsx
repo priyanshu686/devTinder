@@ -3,16 +3,27 @@ import React,{useState} from "react";
 
 const Navbar = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   }
+
+
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div className="navbar bg-base-100 shadow-lg">
       <div className="flex-1">
         <a className="btn btn-ghost text-xl">DevTinder</a>
       </div>
-
-      <div className="flex-none">
+      <div className="dropdown ">
+      <div className="btn btn-ghost btn-circle avatar mx-2">
+        <div className="w-8 rounded-full">
+          <img
+            alt="Profile Block"
+            src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+        </div>
+      </div>
+      </div>
+      <div className="flex-none dropdown">
         <button
           className="btn btn-square btn-ghost"
           onClick={toggleMenu}
@@ -33,25 +44,13 @@ const Navbar = () => {
             ></path>{" "}
           </svg>
         </button>
-        {isMenuOpen && (
-            <div
-              // ref={menuRef} 
-              className="absolute right-0 w-40 bg-white text-black shadow-lg rounded-lg mt-2 z-10"
-            >
-              <ul className="py-2">
-                <li>
-                  <a href="/profile" className="block px-4 py-2 hover:bg-gray-200">Profile</a>
-                </li>
-                <li>
-                  <a href="/settings" className="block px-4 py-2 hover:bg-gray-200">Settings</a>
-                </li>
-                <li>
-                  <a href="/logout" className="block px-4 py-2 hover:bg-gray-200">Logout</a>
-                </li>
-              </ul>
-            </div>
-        )}
+          <ul className="absolute dropdown-content right-4 top-16 bg-white shadow-lg rounded-lg p-0 space-y-2 m-0 h-auto w-28">
+            <li className="hover:bg-base-300 cursor-pointer p-4">Profile</li>
+            <li className="hover:bg-base-300 cursor-pointer p-4">Home</li>
+            <li className="hover:bg-base-300 cursor-pointer p-4">Logout</li>
+          </ul>
       </div>
+      
     </div>
 
 
