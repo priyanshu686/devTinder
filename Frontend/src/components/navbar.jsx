@@ -1,7 +1,19 @@
-
+import axios from "axios";
 
 
 const Navbar = () => {
+  const handleClick = async()=>{
+    try{
+      const res = await axios.post(
+        'http://localhost:7777/auth/logout',{},{withCredentials:true}
+      );
+      console.log(res.data);
+    }catch(err){
+      console.log(err);
+    }
+    
+
+  }
   return (
     <div className="navbar bg-neutral shadow-lg">
       <div className="flex-1">
@@ -37,12 +49,12 @@ const Navbar = () => {
           </svg>
         </div>
         <ul
-          tabindex={1}
+          tabIndex={1}
           className=" absolute dropdown-content right-4 top-16 bg-white shadow-lg rounded-lg p-0 space-y-2 m-0 h-auto w-28"
         >
-          <li className="hover:bg-base-300 cursor-pointer p-4">Profile</li>
-          <li className="hover:bg-base-300 cursor-pointer p-4">Home</li>
-          <li className="hover:bg-base-300 cursor-pointer p-4">Logout</li>
+          <li className="hover:bg-base-300 cursor-pointer p-4 text-center">Profile</li>
+          <li className="hover:bg-base-300 cursor-pointer p-4 text-center">Home</li>
+          <button className="hover:bg-base-300 w-full" onClick={handleClick}><li className=" cursor-pointer p-4" >Logout</li></button>
         </ul>
       </div>
     </div>
