@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Validation from "../utils/LoginValidation";
 import axios from "axios";
+import { useDispatch , useSelector } from "react-redux";
+import {setUser} from '../utils/userSlice';
 
 const Login = () => {
   const [email, setemail] = useState("");
   const [Password, setpassword] = useState("");
   const [check, setcheck] = useState(false);
-
+  const Data = useSelector((state) => state.user);
+  const Dispatch = useDispatch();
   const onClickHandler = async () => {
     if (Validation(email, Password) != null) {
       setcheck(Validation(email, Password));
@@ -17,6 +20,7 @@ const Login = () => {
         Password,
       };
       // console.log(data)
+      ;
       try {
         const res = await axios.post(
           'http://localhost:7777/auth/login',
@@ -24,6 +28,9 @@ const Login = () => {
           {withCredentials:true}
         );
         console.log(res.data);
+        Dispatch(setUser(res.data));
+        // console.log(Data);
+
       } catch (err) {
         console.log(err);
         alert(err.response.data); 
@@ -69,10 +76,11 @@ const Login = () => {
             <p className="text-center">Don't have an account?</p>
             <button
               className="btn btn-link"
-              // onClick={() => (window.location.href = "")}
+              onClick={() => (window.location.href = "/signup")}
             >
               Sign Up
             </button>
+            {/* <p>{JSON.stringify(Data)}</p> */}
           </div>
         </div>
       </div>
