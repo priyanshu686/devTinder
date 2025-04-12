@@ -17,7 +17,7 @@ const Body = () => {
       const res = await axios.get("http://localhost:7777/profile/info", { withCredentials: true });
       dispatch(setUser(res.data));
       // console.log(res.data)
-      return navigate("/feed");
+      return navigate("feed");
     } catch (err) {
       if(err.response.status === 401) {
         setError(err.response.data);
@@ -29,7 +29,7 @@ const Body = () => {
   };
   useEffect(() => {
     fetchdata();
-  }, [user]);
+  }, []);
   return (
     <div>
       <Navbar />

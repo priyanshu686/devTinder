@@ -1,9 +1,17 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const multer = require("multer");
+const path = require("path");
 const validator = require("validator");
 const User = require("../Models/UserModel");
 const { emailcheck } = require("../utils/validate_Email");
 require("dotenv").config();
+
+
+
+
+
+
 
 const adddata = async (req, res) => {
   // Static Data Entry
@@ -14,6 +22,11 @@ const adddata = async (req, res) => {
   //     DOB: new Date(2003,11,15),
   //     Password:"Bindal@123"
   // })
+  const filename = req.file.filename;
+  const fullUrl = `http://localhost:3000/uploads/${filename}`;
+  console.log(fullUrl)
+
+
   const { firstName, lastName, email, DOB, gender, Password, TechnicalSkills } =
     req.body;
   try {
@@ -22,6 +35,7 @@ const adddata = async (req, res) => {
     }
     const passwordhash = await bcrypt.hash(Password, 10);
     const user = new User({
+      photoUrl:fullUrl,
       firstName,
       lastName,
       email,

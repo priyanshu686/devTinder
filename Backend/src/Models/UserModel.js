@@ -1,6 +1,16 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const UserSchema =  new mongoose.Schema({
+    photoUrl:{
+        type:String,
+        required:true,
+        default:"https://www.w3schools.com/howto/img_avatar.png",
+        validate(value){
+            if(!validator.isURL(value)){
+                throw new error("Photo URL is not valid")
+            }
+        }
+    },
     firstName:{
         type:String,
         required:true,
