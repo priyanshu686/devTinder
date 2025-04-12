@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import { Outlet, useNavigate } from "react-router";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../utils/userSlice";
+import { setUser } from "../utils/UserSlice";
 
 const Body = () => {
   const [error , setError] = useState(null)

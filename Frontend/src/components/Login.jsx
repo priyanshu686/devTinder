@@ -2,7 +2,7 @@ import React, { useEffect, useState, } from "react";
 import Validation from "../utils/LoginValidation";
 import axios from "axios";
 import { useDispatch , useSelector } from "react-redux";
-import {setUser} from '../utils/userSlice';
+import {setUser} from '../utils/UserSlice';
 import { Link } from "react-router";
 import { useNavigate } from "react-router";
 
