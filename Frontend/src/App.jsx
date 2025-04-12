@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import Body from "./components/Body";
 import Login from "./components/Login";
 import Signup from "./components/signup";
+import Feed from "./components/Feed"
 import { Provider} from 'react-redux';
 import Store from './utils/Store'
 function App() {
@@ -12,10 +13,11 @@ function App() {
       children: [
         {
           index: true,
+          Component: Login,
         },
         {
-          path: "login",
-          Component: Login,
+          path:"feed",
+          Component: Feed,
         },
         {
           path: "signup",

@@ -21,7 +21,7 @@ const getdata = async (req, res) => {
 const getdatabyemail = async (req, res) => {
     // const email = req.params.email;
     try {
-      const {_id,firstName,lastName,email,TechnicalSkills} = req.userdata;
+      const {_id,firstName,lastName,email,TechnicalSkills,gender,DOB} = req.userdata;
       // const user = await User.findOne({ email: email });
       // console.log(User1);
       res.send({
@@ -29,7 +29,9 @@ const getdatabyemail = async (req, res) => {
         firstName,
         lastName,
         email,
-        TechnicalSkills
+        TechnicalSkills,
+        gender,
+        DOB
       });
     } catch (err) {
       res.status(400).send("Something is Wrong");

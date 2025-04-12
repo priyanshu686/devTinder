@@ -1,13 +1,19 @@
 import axios from "axios";
-
-
+import { useNavigate } from "react-router";
+import {useDispatch} from "react-redux";
+import { removeUser } from "../utils/UserSlice";
+ 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleClick = async()=>{
     try{
       const res = await axios.post(
         'http://localhost:7777/auth/logout',{},{withCredentials:true}
       );
-      console.log(res.data);
+      navigate("/")
+      dispatch(removeUser())
+      // console.log(res.data);
     }catch(err){
       console.log(err);
     }

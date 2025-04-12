@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, } from "react";
 import Validation from "../utils/LoginValidation";
 import axios from "axios";
 import { useDispatch , useSelector } from "react-redux";
 import {setUser} from '../utils/userSlice';
+import { Link } from "react-router";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const [email, setemail] = useState("");
@@ -10,6 +12,7 @@ const Login = () => {
   const [check, setcheck] = useState(false);
   const Data = useSelector((state) => state.user);
   const Dispatch = useDispatch();
+  const navigator = useNavigate();
   const onClickHandler = async () => {
     if (Validation(email, Password) != null) {
       setcheck(Validation(email, Password));
@@ -27,8 +30,9 @@ const Login = () => {
           data,
           {withCredentials:true}
         );
-        console.log(res.data);
+        // console.log(res.data);
         Dispatch(setUser(res.data));
+        navigator("/feed");
         // console.log(Data);
 
       } catch (err) {
@@ -74,12 +78,9 @@ const Login = () => {
           )}
           <div>
             <p className="text-center">Don't have an account?</p>
-            <button
-              className="btn btn-link"
-              onClick={() => (window.location.href = "/signup")}
-            >
-              Sign Up
-            </button>
+            <Link to = "/signup" className="btn btn-link">
+              Sign Up 
+            </Link>
             {/* <p>{JSON.stringify(Data)}</p> */}
           </div>
         </div>
