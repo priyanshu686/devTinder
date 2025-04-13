@@ -80,7 +80,7 @@ const updatedata = async (req, res) => {
   const data = req.userdata;
   const update = req.body;
   try {
-    const Allowed_Update = ["lastname", "DOB", "TechnicalSkills","gender"];
+    const Allowed_Update = ["firstName","lastName", "DOB", "TechnicalSkills","gender"];
     const check = Object.keys(update).every((k) =>
          Allowed_Update.includes(k)
     );
@@ -92,7 +92,10 @@ const updatedata = async (req, res) => {
     }
     Object.keys(update).forEach((k)=>data[k] = update[k]);
     await data.save();
-    res.send("Data Updated");
+    // const data1 = await User.findOne({_id:data._id}).select("")
+    const data1 = await User.findOne({ email: data.email }).select("firstName lastName TechnicalSkills gender DOB email")
+    
+    res.json({message:"Data Updated",data:data1});
   } catch (err) {
     res.status(401).send(err.message);
   }

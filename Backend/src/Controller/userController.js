@@ -72,8 +72,8 @@ const feed = async(req,res)=>{
                 {_id: {$nin: Array.from(removingids)}},
                 {_id:{$ne:logged._id}}
             ]
-        }).select("firstName lastName email DOB gender TechnicalSkills");
-        res.send(data);
+        }).select("firstName lastName email DOB gender TechnicalSkills ");
+        res.json({message:"All Users Data",data:data});
         
     }catch(err){
         res.status(400).send("ERROR: "+ err.message);

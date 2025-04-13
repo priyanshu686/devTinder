@@ -22,20 +22,18 @@ const adddata = async (req, res) => {
   //     DOB: new Date(2003,11,15),
   //     Password:"Bindal@123"
   // })
-  const filename = req.file.filename;
-  const fullUrl = `http://localhost:3000/uploads/${filename}`;
-  console.log(fullUrl)
+ 
 
 
   const { firstName, lastName, email, DOB, gender, Password, TechnicalSkills } =
     req.body;
+ 
   try {
     if (TechnicalSkills.length > 10) {
       throw new error("Skills should be not more then 10");
     }
     const passwordhash = await bcrypt.hash(Password, 10);
     const user = new User({
-      photoUrl:fullUrl,
       firstName,
       lastName,
       email,
@@ -47,7 +45,7 @@ const adddata = async (req, res) => {
     await user.save();
     res.send("Data Added Successfully");
   } catch (err) {
-    console.error(err.message);
+    console.error("Error:" + err.message);
   }
 };
 

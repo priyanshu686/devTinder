@@ -7,8 +7,8 @@ import { Link } from "react-router";
 import { useNavigate } from "react-router";
 
 const Login = () => {
-  const [email, setemail] = useState("");
-  const [Password, setpassword] = useState("");
+  const [email, setemail] = useState("bindalpriyanshu6@gmail.com");
+  const [Password, setpassword] = useState("Bindal@123");
   const [check, setcheck] = useState(false);
   const Data = useSelector((state) => state.user);
   const Dispatch = useDispatch();
@@ -37,7 +37,7 @@ const Login = () => {
 
       } catch (err) {
         console.log(err);
-        alert(err.response.data); 
+        setcheck(err.response.data);
       }
     }
   };
