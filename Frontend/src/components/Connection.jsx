@@ -4,7 +4,6 @@ import { Outlet, useNavigate } from 'react-router'
 const Connection = () => {
     const navigate = useNavigate();
     const handleFriends = () => {
-        console.log('Friends');
         navigate('/connection/friends')
     }
     const handleRequests = () =>{
