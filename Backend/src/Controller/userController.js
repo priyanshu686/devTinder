@@ -6,7 +6,7 @@ const GetConnection = async(req,res) => {
     const Connections = await ConnectionRequest.find({
         ToUserId:UserID,
         Status:"Interested"
-    }).populate("FromUserId","firstName lastName email DOB gender TechnicalSkills");
+    }).populate("FromUserId","firstName lastName email DOB gender TechnicalSkills photoUrl");
     if(!Connections){
         res.json({message:"No Request Found"})
     }

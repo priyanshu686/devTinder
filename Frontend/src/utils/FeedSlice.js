@@ -7,11 +7,14 @@ const feed = createSlice({
         setfeed:(state,action)=>{
             return action.payload;
         },
+        removeonedata:(state,action)=>{
+            return state.filter((item)=> item._id !== action.payload)
+        },
         removefeed:(state,action)=>{
             return null;
         }
     }
 })
 
-export const {setfeed,removefeed} = feed.actions;
+export const {setfeed,removeonedata,removefeed} = feed.actions;
 export default feed.reducer;
