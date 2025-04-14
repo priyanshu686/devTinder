@@ -6,6 +6,9 @@ import Feed from "./components/Feed"
 import { Provider} from 'react-redux';
 import Store from './utils/Store'
 import Profile from "./components/Profile";
+import Connection from "./components/Connection";
+import Friends from "./components/Friends";
+import Requests from "./components/Requests";
 function App() {
   const Route = createBrowserRouter([
     {
@@ -27,6 +30,20 @@ function App() {
         {
           path: "profile",
           Component: Profile
+        },
+        {
+          path:"connection",
+          Component: Connection,
+          children:[
+            {
+              path:"friends",
+              Component: Friends
+            },
+            {
+              path:"requests",
+              Component:Requests
+            }
+          ],
         },
       ],
     },

@@ -124,7 +124,7 @@ const EditProfile = ({ user }) => {
       </div>
       
     </div>
-    {/* <UserCard user= {{firstName , lastName ,TechnicalSkills, gender,DOB}}/> */}
+    <UserCard user= {{firstName , lastName ,TechnicalSkills, gender,DOB}}/>
     </div>
   );
 };

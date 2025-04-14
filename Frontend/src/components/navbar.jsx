@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch , useSelector} from "react-redux";
 import { removeUser } from "../utils/UserSlice";
+import { use } from "react";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const handleClick = async () => {
     try {
@@ -21,10 +23,22 @@ const Navbar = () => {
     }
   };
 
+  const handleonClick = ()=>{
+    if(user){
+      navigate("/feed")
+    }
+    else{
+      navigate("/")
+    }
+  }
+
   return (
     <div className="navbar bg-neutral shadow-lg">
       <div className="flex-1">
-        <a className="mx-2 font-bold text-xl text-white">DevTinder</a>
+        
+        <button onClick={handleonClick} >
+        <a className="btn btn-primary  mx-2 font-bold text-xl text-white">DevTinder</a>
+        </button>
       </div>
 
       <div className="avatar mx-2">
@@ -68,9 +82,9 @@ const Navbar = () => {
           </li>
           <li
             className="hover:bg-base-300 cursor-pointer p-4 text-center"
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/connection")}
           >
-            Home
+            Connection
           </li>
           <li
             className="hover:bg-base-300 cursor-pointer p-4 text-center"

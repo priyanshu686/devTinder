@@ -22,7 +22,7 @@ const UserCard = ({user}) => {
             {firstName} {lastName}
           </h2>
           <h4>{age} {gender}</h4>
-          <p> Technical Skills - {TechnicalSkills.join(" , ")}</p>
+          <p> Technical Skills - {TechnicalSkills}</p>
           <div className="card-actions justify-center">
             <button className="btn btn-primary">Intersted</button>
             <button className="btn btn-secondary">Ignore</button>
